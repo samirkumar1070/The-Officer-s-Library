@@ -1,0 +1,63 @@
+.adminpage{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(57, 153, 191);
+}
+.l1{
+   text-decoration: none;
+   list-style: none;
+   display: flex;
+   gap: 2em;
+}
+
+/* ADD */
+.form{
+    margin: 0px;
+    padding: 0px;
+    gap: 5px;
+    margin-top: 30px;
+}
+.button{
+    border-radius: 20px;
+}
+input[type=text],input[type=number],input[type=date],select, textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+}
+label {
+    padding: 12px 12px 12px 0;
+    display: block;
+}
+
+/* VIEW-REMOVE */
+.main{
+    display: flex;
+}
+
+/* ADDDATA MESSAGE */
+
+/* admin.css */
+
+.message {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
