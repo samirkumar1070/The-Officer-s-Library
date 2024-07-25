@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { format } from 'date-fns'; // Import the format function from date-fns
 
 const ShowDetails = () => {
   const [studentDetails, setStudentDetails] = useState([]);
@@ -8,13 +9,9 @@ const ShowDetails = () => {
 
   useEffect(() => {
     const fetchDetails = async () => {
-      //const token = localStorage.getItem('accessToken');
       try {
         const response = await axios.get('http://localhost:5000/view', {
           params: { time }, // Send 'time' parameter in query
-          // headers: {
-          //   Authorization: `Bearer ${token}`
-          // },
           withCredentials: true
         });
         setStudentDetails(response.data);
@@ -41,6 +38,10 @@ const ShowDetails = () => {
       console.error('Error deleting item:', error);
       setError('Failed to delete item');
     }
+  };
+
+  const formatDate = (dateString) => {
+    return format(new Date(dateString), 'dd/MM/yyyy');
   };
 
   if (error) {
@@ -82,7 +83,7 @@ const ShowDetails = () => {
               <td>{sub.fathername}</td>
               <td>{sub.mobile}</td>
               <td>{sub.address}</td>
-              <td>{sub.doj}</td>
+              <td>{formatDate(sub.doj)}</td>
               <td>
                 <button onClick={() => handleDelete(sub._id)}>Delete</button>
               </td>

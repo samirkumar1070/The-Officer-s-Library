@@ -43,7 +43,7 @@ const AddData = () => {
             }
         } catch (error) {
             setMessageType('error');
-            setMessage('Error: ' + error.response.data || "Failed to save data");
+            setMessage('Error: ' + (error.response?.data?.message || "Failed to save data"));
         }
     }
 

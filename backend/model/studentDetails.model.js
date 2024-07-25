@@ -31,7 +31,5 @@ const MemberDetailsSchema =new mongoose.Schema({
     }
 },{timestamps:true})
 
-MemberDetailsSchema.index({ seatno: 1, time: 1 }, { unique: true }); //Compound unique index to ensure that two students do not get the same seat number in the same time slot, but allow the same seat number in different time slots
-
 export const Detail = mongoose.model("Detail",MemberDetailsSchema);
 

@@ -1,18 +1,38 @@
 import {Detail} from '../model/studentDetails.model.js';
+import { checkOverlap } from '../utils/checkOverlap.js';
 
 
 const saveDetail = async (req, res) => {
     const { seatno, name, fathername, address, mobile, time, doj } = req.body;
-    const newDetail = new Detail({ seatno, name, fathername, address, mobile, time, doj });
+
     try {
-        await newDetail.save();
-        res.status(201).send("Data is saved");
-    } catch (error) {
-        if (error.code === 11000) {
-            res.status(400).send("Seat number already exists in this time slot");
-        } else {
-            res.status(500).send("Error while saving the data");
+        // Check if there's any student with the same seat number in an overlapping time slot
+        const existingStudents = await Detail.find({ seatno, doj });
+
+        const hasOverlap = existingStudents.some(student => 
+            checkOverlap(student.time, time)
+        );
+
+        if (hasOverlap) {
+            return res.status(400).json({ message: 'A student with the same seat number already exists in an overlapping time slot.' });
         }
+
+        const newStudent = new Detail({
+            seatno,
+            name,
+            fathername,
+            address,
+            mobile,
+            time,
+            doj
+        });
+
+        await newStudent.save();
+
+        res.status(201).json({ message: 'Data saved successfully' });
+    } catch (error) {
+        console.error('Error saving data:', error); // Log the error for debugging
+        res.status(500).json({ message: 'Failed to save data', error: error.message });
     }
 };
 
@@ -21,7 +41,7 @@ const getDetails = async (req, res) => {
 
     try {
         const query = time ? { time } : {}; // Filter by 'time' if provided
-        const details = await Detail.find(query);
+        const details = await Detail.find(query).sort({ seatno: 1 });
         res.status(200).json(details);
     } catch (error) {
         res.status(500).json({ error: 'Failed to get details' });
