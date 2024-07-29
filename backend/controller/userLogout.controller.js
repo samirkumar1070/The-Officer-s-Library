@@ -1,15 +1,15 @@
-import { Admin } from "../model/adminRegister.model.js";
+import { User } from "../model/user.model.js";
 
 const logout = async (req, res) => {
     const { email } = req.body;
     try {
-        let admin = await Admin.findOne({ email });
-        if (!admin) {
+        let user = await User.findOne({ email });
+        if (!user) {
             return res.status(400).json({ msg: 'Invalid email' });
         }
 
-        admin.refreshToken = null; // Invalidate the refresh token
-        await admin.save();
+        user.refreshToken = null; // Invalidate the refresh token
+        await user.save();
 
         res.json({ msg: 'Logged out successfully' });
     } catch (err) {

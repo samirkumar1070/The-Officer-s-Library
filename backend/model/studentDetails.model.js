@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MemberDetailsSchema =new mongoose.Schema({
+const StudentDetailsSchema =new mongoose.Schema({
     seatno:{
         type:Number,
         required: true,
@@ -28,8 +28,13 @@ const MemberDetailsSchema =new mongoose.Schema({
     doj:{
         type:Date,
         required: true,
+    },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User',
+        required: true
     }
 },{timestamps:true})
 
-export const Detail = mongoose.model("Detail",MemberDetailsSchema);
+export const Detail = mongoose.model("Detail",StudentDetailsSchema);
 

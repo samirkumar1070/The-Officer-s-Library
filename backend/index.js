@@ -1,9 +1,9 @@
 import express, { urlencoded } from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import { register } from './controller/adminRegister.controller.js';
-import { login } from './controller/adminLogin.controller.js';
-import { logout } from './controller/adminLogout.controller.js';
+import { register } from './controller/userRegister.controller.js';
+import { login } from './controller/userLogin.controller.js';
+import { logout } from './controller/userLogout.controller.js';
 import { getDetails, remove, saveDetail, countStudentsByTimeSlot } from './controller/studentDetails.controller.js';
 import { connectDB } from './db/connect.db.js';
 import verifyToken from './middleware/verifyToken.js'
@@ -34,7 +34,7 @@ app.post('/logout', logout);
 app.post('/add',verifyToken,saveDetail);
 app.get('/view',verifyToken,getDetails);
 app.delete('/delete/:id',verifyToken,remove);
-app.get('/countStudentsByTimeSlot', countStudentsByTimeSlot);
+app.get('/countStudentsByTimeSlot',verifyToken,countStudentsByTimeSlot);
 
 app.listen(process.env.PORT,(err)=>{
     if(err) throw err;

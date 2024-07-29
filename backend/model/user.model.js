@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const AdminSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     email:{
         type:String,
         required:true,
@@ -17,18 +17,18 @@ const AdminSchema = new mongoose.Schema({
     }
 },{timestamps:true});
 
-AdminSchema.pre('save',async function (next){
+UserSchema.pre('save',async function (next){
     if(!this.isModified('password')) return next();
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password,salt);
     next();
 })
 
-AdminSchema.methods.comparePassword = async function(password){
+UserSchema.methods.comparePassword = async function(password){
     return await bcrypt.compare(password,this.password);
 }
 
-AdminSchema.methods.generateAccessToken = function (){
+UserSchema.methods.generateAccessToken = function (){
     return jwt.sign(
         {
             _id : this._id,
@@ -41,7 +41,7 @@ AdminSchema.methods.generateAccessToken = function (){
     )
 }
 
-AdminSchema.methods.generateRefreshToken = function (){
+UserSchema.methods.generateRefreshToken = function (){
     return jwt.sign(
         {
             _id : this._id
@@ -53,4 +53,4 @@ AdminSchema.methods.generateRefreshToken = function (){
     )
 }
 
-export const Admin = mongoose.model("Admin",AdminSchema);
+export const User = mongoose.model("User",UserSchema);

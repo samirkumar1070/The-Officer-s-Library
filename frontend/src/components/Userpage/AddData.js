@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../Styles/admin.css';
+import '../Styles/user.css';
 
 const AddData = () => {
     const [formData, setFormData] = useState({

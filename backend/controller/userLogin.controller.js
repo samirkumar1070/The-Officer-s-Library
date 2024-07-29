@@ -1,23 +1,23 @@
-import {Admin} from "../model/adminRegister.model.js";
+import {User} from "../model/user.model.js";
 
 const login = async (req, res) => {
     const { email, password } = req.body;
     try {
-        let admin = await Admin.findOne({ email });
-        if (!admin) {
+        let user = await User.findOne({ email });
+        if (!user) {
             return res.status(400).json({ msg: 'Invalid Credentials' });
         }
 
-        const isMatch = await admin.comparePassword(password);
+        const isMatch = await user.comparePassword(password);
         if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid Credentials' });
         }
 
-        const accessToken = admin.generateAccessToken();
-        const refreshToken = admin.generateRefreshToken();
+        const accessToken = user.generateAccessToken();
+        const refreshToken = user.generateRefreshToken();
 
-        admin.refreshToken = refreshToken;
-        await admin.save();
+        user.refreshToken = refreshToken;
+        await user.save();
 
         res.json({ accessToken, refreshToken });
 

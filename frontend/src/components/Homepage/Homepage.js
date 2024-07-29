@@ -19,6 +19,7 @@ function Homepage() {
             try {
                 const response = await axios.get('http://localhost:5000/countStudentsByTimeSlot', { withCredentials: true });
                 setStudentCounts(response.data);
+                console.log(response.data); // Add this line to debug the response
             } catch (error) {
                 console.error('Error fetching student counts:', error);
                 setError('Failed to get student counts');
