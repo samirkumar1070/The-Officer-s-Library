@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import './style.css';
+import '../Styles/loginRegister.css';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -18,7 +18,7 @@ const Login = () => {
             //setting accessToken in the cookie 
             Cookies.set('accessToken', response.data.accessToken, { secure: true, sameSite: 'Strict' });
             //Cookies.set('refreshToken', response.data.refreshToken, { secure: true, sameSite: 'Strict' });
-            navigate('/admin');
+            navigate('/user');
         } catch (error) {
             console.error('login failed', error);
             alert('Invalid Credentials');
@@ -27,15 +27,20 @@ const Login = () => {
 
     return (
         <div className='login-container'>
-            <form onSubmit={handleLogin} className='login-box'>
-                <label className='label'>Email Id: 
-                    <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className='input' />
-                </label>
-                <label className='label'>Password: 
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className='input' />
-                </label>
-                <button type='submit' className='button'>Submit</button>
-            </form>
+            <div className='modal'>
+                <h2>Login</h2>
+                <form onSubmit={handleLogin}>
+                    <div className='form-group'>
+                        <label className='label'>Email Id:</label>
+                        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className='input' />
+                    </div>
+                    <div className='form-group'>
+                        <label className='label'>Password:</label>
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className='input' />
+                    </div>
+                    <button type='submit' className='button'>Submit</button>
+                </form>
+            </div>
         </div>
     )
 }

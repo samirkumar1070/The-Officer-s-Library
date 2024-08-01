@@ -4,7 +4,7 @@
     padding: 0;
     width: 100%;
     height: 100vh; /* Make sure it takes full viewport height */
-    background-color: rgb(57, 153, 191);
+    background-color: rgb(234, 235, 236);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -127,4 +127,64 @@ label {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
+}
+
+/* Table Container */
+.table-container {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px; /* Adjust based on your layout */
+    overflow-x: auto; /* Handle overflow if the table is too wide */
+}
+
+/* Table Style */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Ensure no extra space between borders */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background-color: #f2f2f2; /* Light grey background for header */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Light background for odd rows */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White background for even rows */
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1; /* Slightly darker background on hover */
+}
+
+/* Button Style in Table */
+button {
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
 }

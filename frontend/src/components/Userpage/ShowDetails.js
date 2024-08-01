@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns'; // Import the format function from date-fns
+import '../Styles/homepage.css'; // Ensure the CSS file is correctly imported
 
 const ShowDetails = () => {
   const [studentDetails, setStudentDetails] = useState([]);
@@ -63,34 +64,36 @@ const ShowDetails = () => {
         <button onClick={() => handleTimeClick('s9')}>10:00PM-05:00AM</button>
         <button onClick={() => handleTimeClick('s10')}>24 HOURS</button>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Seat No</th>
-            <th>Name</th>
-            <th>Father's Name</th>
-            <th>Mobile</th>
-            <th>Address</th>
-            <th>Date of Joining</th>
-            <th>Actions</th> {/* Column for delete buttons */}
-          </tr>
-        </thead>
-        <tbody>
-          {studentDetails.map(sub => (
-            <tr key={sub._id}>
-              <td>{sub.seatno}</td>
-              <td>{sub.name}</td>
-              <td>{sub.fathername}</td>
-              <td>{sub.mobile}</td>
-              <td>{sub.address}</td>
-              <td>{formatDate(sub.doj)}</td>
-              <td>
-                <button onClick={() => handleDelete(sub._id)}>Delete</button>
-              </td>
+      <div className='table-container'>
+        <table>
+          <thead>
+            <tr>
+              <th>Seat No</th>
+              <th>Name</th>
+              <th>Father's Name</th>
+              <th>Mobile</th>
+              <th>Address</th>
+              <th>Date of Joining</th>
+              <th>Actions</th> {/* Column for delete buttons */}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {studentDetails.map(sub => (
+              <tr key={sub._id}>
+                <td>{sub.seatno}</td>
+                <td>{sub.name}</td>
+                <td>{sub.fathername}</td>
+                <td>{sub.mobile}</td>
+                <td>{sub.address}</td>
+                <td>{formatDate(sub.doj)}</td>
+                <td>
+                  <button onClick={() => handleDelete(sub._id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

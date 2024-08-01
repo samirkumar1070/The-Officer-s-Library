@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../Styles/loginRegister.css';
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -33,23 +34,26 @@ const Register = () => {
 
   return (
     <div className='register-container'>
-      <form onSubmit={handleRegister} className='register-box'>
-        <div>
-          <label className='label'>Enter Email: </label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </div>
-        <div>
-          <label className='label'>Enter Password: </label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <div>
-          <label className='label'>Confirm Password: </label>
-          <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        {message && <p style={{ color: 'green' }}>{message}</p>}
-        <button type="submit" className='button'>Submit</button>
-      </form>
+      <div className='modal'>
+        <h2>Register</h2>
+        <form onSubmit={handleRegister}>
+          <div className='form-group'>
+            <label className='label'>Enter Email:</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className='input' />
+          </div>
+          <div className='form-group'>
+            <label className='label'>Enter Password:</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required className='input' />
+          </div>
+          <div className='form-group'>
+            <label className='label'>Confirm Password:</label>
+            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required className='input' />
+          </div>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {message && <p style={{ color: 'green' }}>{message}</p>}
+          <button type="submit" className='button'>Submit</button>
+        </form>
+      </div>
     </div>
   );
 };
