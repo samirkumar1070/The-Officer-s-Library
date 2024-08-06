@@ -1,11 +1,15 @@
 import {User} from "../model/user.model.js";
 
-const login = async (req, res) => {
+const loginUser = async (req, res) => {
     const { email, password } = req.body;
     try {
         let user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ msg: 'Invalid Credentials' });
+        }
+
+        if (!user.isActive) {
+            return res.status(403).json({ msg: 'Your account is blocked. Please contact admin.' });
         }
 
         const isMatch = await user.comparePassword(password);
@@ -27,4 +31,4 @@ const login = async (req, res) => {
     }
 }
 
-export {login};
+export {loginUser};

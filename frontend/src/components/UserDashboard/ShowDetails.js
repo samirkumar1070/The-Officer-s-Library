@@ -11,7 +11,7 @@ const ShowDetails = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/view', {
+        const response = await axios.get('http://localhost:5000/user/view', {
           params: { time }, // Send 'time' parameter in query
           withCredentials: true
         });
@@ -31,7 +31,7 @@ const ShowDetails = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/delete/${id}`, { withCredentials: true });
+      const response = await axios.delete(`http://localhost:5000/user/delete/${id}`, { withCredentials: true });
       if (response.status === 200) {
         setStudentDetails(studentDetails.filter(sub => sub._id !== id)); // Remove deleted item from state
       }

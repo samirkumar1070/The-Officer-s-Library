@@ -8,11 +8,24 @@ const Logout = () => {
 
   const handleLogout = async () => {
     try {
-      const email = 'sam123@gmail.com'; // Replace with the actual email of the logged-in admin
-      await axios.post('http://localhost:5000/logout', { email });
-      //localStorage.removeItem('token');
-      Cookies.remove('accessToken'); 
-      navigate('/');
+      const userEmail = Cookies.get('userEmail');
+      const adminEmail = Cookies.get('adminEmail');
+
+      if (userEmail) {
+        await axios.post('http://localhost:5000/user/logout', { email: userEmail });
+        // Clear user-related cookies
+        Cookies.remove('userEmail');
+        Cookies.remove('userAccessToken');
+        navigate('/');
+      } else if (adminEmail) {
+        await axios.post('http://localhost:5000/admin/logout', { email: adminEmail });
+        // Clear admin-related cookies
+        Cookies.remove('adminEmail');
+        Cookies.remove('adminAccessToken');
+        navigate('/');
+      } else {
+        console.error('No logged-in user or admin found');
+      }
     } catch (error) {
       console.error('Logout failed', error);
     }

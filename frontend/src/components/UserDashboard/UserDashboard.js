@@ -25,8 +25,8 @@ function UserDashboard() {
   return (
     <div className='userpage'>
       <nav className='navbar'>
-        <button onClick={handleHomeClick} className='nav-button'>Home</button>
-        <div className='logout-button'><Logout /></div>
+        <button onClick={handleHomeClick}>Home</button>
+        <div ><Logout /></div>
       </nav>
       <div className='component-block'>
         <ul className='l1'>

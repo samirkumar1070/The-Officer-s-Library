@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { User } from '../model/user.model.js';
 
-const verifyToken = async (req, res, next) => {
-    const token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer ", "");
+const verifyUserToken = async (req, res, next) => {
+    const token = req.cookies.userAccessToken || req.header("Authorization")?.replace("Bearer ", "");
 
     // Log tokens for debugging
     // console.log("Token from cookie:", req.cookies.accessToken);
@@ -30,4 +30,4 @@ const verifyToken = async (req, res, next) => {
     }
 };
 
-export default verifyToken;
+export default verifyUserToken;

@@ -1,6 +1,6 @@
 import {User} from '../model/user.model.js';
 
-const register = async (req, res) => {
+const registerUser = async (req, res) => {
   const {email,password} = req.body;
   try {
       let user = await User.findOne({ email });
@@ -15,4 +15,4 @@ const register = async (req, res) => {
       res.status(500).send('Server error');
   }
 }
- export {register};
+ export {registerUser};

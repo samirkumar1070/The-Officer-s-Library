@@ -19,7 +19,7 @@ function Homepage() {
     useEffect(() => {
         const fetchStudentCounts = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/countStudentsByTimeSlot', { withCredentials: true });
+                const response = await axios.get('http://localhost:5000/user/countStudentsByTimeSlot', { withCredentials: true });
                 setStudentCounts(response.data);
                 console.log(response.data); // Add this line to debug the response
             } catch (error) {

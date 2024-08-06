@@ -1,0 +1,39 @@
+.admin-dashboard {
+    padding: 20px;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .users-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .users-table th, .users-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .users-table th {
+    background-color: #f2f2f2;
+  }
+  
+  button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .logout-button {
+    padding: 10px 30px; /* Make the logout button slightly larger */
+  }

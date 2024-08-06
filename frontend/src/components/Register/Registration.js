@@ -8,6 +8,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false); // New state for toggling admin/user
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -20,12 +21,13 @@ const Register = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/register', { email, password });
-      setMessage(res.data.msg); // Use the message from the backend
+      const url = isAdmin ? 'http://localhost:5000/admin/register' : 'http://localhost:5000/user/register';
+      const res = await axios.post(url, { email, password });
+      setMessage(res.data.message); // Use the message from the backend
     } catch (err) {
       console.error(err);
-      if (err.response && err.response.data && err.response.data.msg) {
-        setError(err.response.data.msg); // Show specific error message from backend
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message); // Show specific error message from backend
       } else {
         setError("Registration failed");
       }
@@ -35,7 +37,7 @@ const Register = () => {
   return (
     <div className='register-container'>
       <div className='modal'>
-        <h2>Register</h2>
+        <h2>{isAdmin ? 'Register Admin' : 'Register User'}</h2>
         <form onSubmit={handleRegister}>
           <div className='form-group'>
             <label className='label'>Enter Email:</label>
@@ -53,6 +55,9 @@ const Register = () => {
           {message && <p style={{ color: 'green' }}>{message}</p>}
           <button type="submit" className='button'>Submit</button>
         </form>
+        <button onClick={() => setIsAdmin(!isAdmin)} className='toggle-button'>
+          {isAdmin ? 'Switch to User Registration' : 'Switch to Admin Registration'}
+        </button>
       </div>
     </div>
   );

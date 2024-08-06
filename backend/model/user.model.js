@@ -12,6 +12,10 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    isActive: { 
+        type: Boolean, 
+        default: true
+    },
     refreshToken:{
         type: String
     }

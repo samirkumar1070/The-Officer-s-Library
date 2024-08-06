@@ -1,15 +1,15 @@
-import { User } from "../model/user.model.js";
+import { Admin } from "../model/admin.model.js";
 
-const logoutUser = async (req, res) => {
+const logoutAdmin = async (req, res) => {
     const { email } = req.body;
     try {
-        let user = await User.findOne({ email });
-        if (!user) {
+        let admin = await Admin.findOne({ email });
+        if (!admin) {
             return res.status(400).json({ msg: 'Invalid email' });
         }
 
-        user.refreshToken = null; // Invalidate the refresh token
-        await user.save();
+        admin.refreshToken = null; // Invalidate the refresh token
+        await admin.save();
 
         res.json({ msg: 'Logged out successfully' });
     } catch (err) {
@@ -18,4 +18,4 @@ const logoutUser = async (req, res) => {
     }
 };
 
-export {logoutUser};
+export {logoutAdmin};
