@@ -19,8 +19,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
-  background-color: #23bbda;
+  background-color: rgba(35, 187, 218, 0.5); /* Cyan color with transparency */
+  backdrop-filter: blur(10px); /* Blur effect */
   color: white;
+  position: relative;
+  z-index: 10; /* Ensure the header is above the main content */
 }
 
 .logo {
@@ -59,23 +62,23 @@
 
 @media (max-width: 768px) {
   .nav {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      background-color: #333;
-      border: 1px solid #444;
-      padding: 10px;
-      background-color: aqua;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid #444;
+    padding: 10px;
+    backdrop-filter: blur(10px); /* Blur effect for the mobile menu */
   }
 
   .nav.open {
-      display: flex;
+    display: flex;
   }
 
   .hamburger {
-      display: flex;
+    display: flex;
   }
 }
 
@@ -114,16 +117,16 @@
 .button-85:before {
   content: "";
   background: linear-gradient(
-      45deg,
-      #ff0000,
-      #ff7300,
-      #fffb00,
-      #48ff00,
-      #00ffd5,
-      #002bff,
-      #7a00ff,
-      #ff00c8,
-      #ff0000
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
   );
   position: absolute;
   top: -2px;
@@ -141,13 +144,13 @@
 
 @keyframes glowing-button-85 {
   0% {
-      background-position: 0 0;
+    background-position: 0 0;
   }
   50% {
-      background-position: 400% 0;
+    background-position: 400% 0;
   }
   100% {
-      background-position: 0 0;
+    background-position: 0 0;
   }
 }
 
@@ -224,11 +227,4 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 1000;
-}
-
-/* FOOTER */
-.footer {
-  background-color: rgb(46, 155, 195);
-  width: 100%;
-  height: 30px;
 }

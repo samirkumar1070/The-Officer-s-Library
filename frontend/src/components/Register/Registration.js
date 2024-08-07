@@ -23,11 +23,15 @@ const Register = () => {
     try {
       const url = isAdmin ? 'http://localhost:5000/admin/register' : 'http://localhost:5000/user/register';
       const res = await axios.post(url, { email, password });
-      setMessage(res.data.message); // Use the message from the backend
+      setMessage(res.data.msg); // Use the message from the backend
+      // Clear form fields after successful registration
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
     } catch (err) {
       console.error(err);
-      if (err.response && err.response.data && err.response.data.message) {
-        setError(err.response.data.message); // Show specific error message from backend
+      if (err.response && err.response.data && err.response.data.msg) {
+        setError(err.response.data.msg); // Show specific error message from backend
       } else {
         setError("Registration failed");
       }

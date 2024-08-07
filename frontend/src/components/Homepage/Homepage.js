@@ -85,7 +85,7 @@ function Homepage() {
                     <Card time="06:00AM-02:00PM" availableSeats={TotalSeats - getCountForTimeSlot('s4')} color="orange" />
                     {/* Add more cards for other time slots as needed */}
                 </div>
-                <div className="footer">
+                <div>
                     <Footer />
                 </div>
             </div>
