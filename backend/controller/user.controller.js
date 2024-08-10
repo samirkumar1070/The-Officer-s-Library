@@ -1,5 +1,6 @@
 import { User } from '../model/user.model.js';
-import { Detail } from '../model/studentDetails.model.js';
+import { Student } from '../model/student.model.js';
+import Payment from '../model/payment.model.js';
 
 const getUsers = async (req, res) => {
   try {
@@ -43,9 +44,19 @@ const unblockUser = async (req, res) => {
 const removeUser = async (req, res) => {
   const { id } = req.params;
   try {
+    // Find all students associated with the user
+    const students = await Student.find({ user:id });
+    const studentIds = students.map(student => student._id);
+
+    // Delete all payments associated with these students
+    await Payment.deleteMany({ studentId: { $in: studentIds } });
+
+    // If there are related Students to be deleted, handled here
+    await Student.deleteMany({ user: id }); 
+
+    //delete user
     await User.findByIdAndDelete(id);
-    // If there are related student details to be deleted, handled here
-    await Detail.deleteMany({ user: id }); // Assuming StudentDetail has a userId field
+   
     res.status(200).json({ msg: 'User removed successfully' });
   } catch (err) {
     console.error(err.message);

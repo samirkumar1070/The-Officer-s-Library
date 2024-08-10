@@ -4,11 +4,12 @@ import cookieParser from 'cookie-parser';
 import { registerUser } from './controller/userRegister.controller.js';
 import { loginUser } from './controller/userLogin.controller.js';
 import { logoutUser } from './controller/userLogout.controller.js';
-import { getDetails, remove, saveDetail, countStudentsByTimeSlot } from './controller/studentDetails.controller.js';
+import { getDetails, remove, saveDetail, countStudentsByTimeSlot } from './controller/student.controller.js';
+import { addPayment,getPayments } from './controller/payment.cotroller.js';
 import { registerAdmin } from './controller/adminRegister.controller.js';
 import { loginAdmin } from './controller/adminLogin.controller.js';
 import { logoutAdmin } from './controller/adminLogout.controller.js';
-import { getUsers, blockUser, unblockUser, removeUser } from './controller/admin.controller.js';
+import { getUsers, blockUser, unblockUser, removeUser } from './controller/user.controller.js';
 import { connectDB } from './db/connect.db.js';
 import verifyUserToken from './middleware/verifyUserToken.js';
 import verifyAdminToken from './middleware/verifyAdminToken.js'
@@ -50,6 +51,8 @@ app.post('/user/login',loginUser);
 app.post('/user/logout', logoutUser);
 app.post('/user/add',verifyUserToken,saveDetail);
 app.get('/user/view',verifyUserToken,getDetails);
+app.post('/user/payment',addPayment);
+app.get('/user/getpayment/:id', getPayments);
 app.delete('/user/delete/:id',verifyUserToken,remove);
 app.get('/user/countStudentsByTimeSlot',verifyUserToken,countStudentsByTimeSlot);
 

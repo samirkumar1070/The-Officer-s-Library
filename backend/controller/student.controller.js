@@ -1,5 +1,6 @@
-import { Detail } from '../model/studentDetails.model.js';
+import { Student } from '../model/student.model.js';
 import { checkOverlap } from '../utils/checkOverlap.js';
+import Payment from '../model/payment.model.js';
 
 // Save a new student detail
 const saveDetail = async (req, res) => {
@@ -9,7 +10,7 @@ const saveDetail = async (req, res) => {
         // Find existing students with the same seat number on the same date
         // console.log('Query parameters:', { seatno, doj, user: req.user._id });
 
-        const existingStudents = await Detail.find({ seatno,user: req.user._id });
+        const existingStudents = await Student.find({ seatno,user: req.user._id });
         // console.log('Existing students:', existingStudents); // Log existing students
 
         // Check for overlapping time slots
@@ -23,7 +24,7 @@ const saveDetail = async (req, res) => {
             return res.status(400).json({ message: 'A student with the same seat number already exists in an overlapping time slot.' });
         }
 
-        const newStudent = new Detail({
+        const newStudent = new Student({
             seatno,
             name,
             fathername,
@@ -53,7 +54,7 @@ const getDetails = async (req, res) => {
         if (time) {
             query.time = time; // Add time filter if provided
         }
-        const details = await Detail.find(query).sort({ seatno: 1 });
+        const details = await Student.find(query).sort({ seatno: 1 });
         res.status(200).json(details);
     } catch (error) {
         console.error('Error fetching details:', error);
@@ -65,10 +66,14 @@ const getDetails = async (req, res) => {
 const remove = async (req, res) => {
     const { id } = req.params;
     try {
-        const student = await Detail.findByIdAndDelete(id);
+        const student = await Student.findByIdAndDelete(id);
         if (!student) {
             return res.status(404).send('Item not found');
         }
+        
+        // Delete associated payments
+        await Payment.deleteMany({studentId:id });
+
         res.status(200).send("Removed successfully");
     } catch (error) {
         console.error('Error removing data:', error);
@@ -81,7 +86,7 @@ const countStudentsByTimeSlot = async (req, res) => {
     const adminId = req.user._id; // Get user ID from the authenticated user
 
     try {
-        const countByTimeSlot = await Detail.aggregate([
+        const countByTimeSlot = await Student.aggregate([
             { $match: { user: adminId } },
             {
                 $group: {

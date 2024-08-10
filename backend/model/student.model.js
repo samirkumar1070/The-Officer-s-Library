@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const StudentDetailsSchema =new mongoose.Schema({
+const StudentSchema =new mongoose.Schema({
     seatno:{
         type:Number,
         required: true,
@@ -33,8 +33,12 @@ const StudentDetailsSchema =new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required: true
-    }
+    },
+    payments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Payment'
+    }]
 },{timestamps:true})
 
-export const Detail = mongoose.model("Detail",StudentDetailsSchema);
+export const Student = mongoose.model("Student",StudentSchema);
 
