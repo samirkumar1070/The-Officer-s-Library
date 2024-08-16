@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 const UserPrivateRoute = () => {
   const isAuthenticated = Cookies.get('userAccessToken'); //!!localStorage.getItem('token') ; // Check if the token is in local storage
-  console.log("Token:", Cookies.get('userAccessToken'));
+  // console.log("Token:", Cookies.get('userAccessToken'));
   return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
 };
 

@@ -53,7 +53,7 @@ const Login = () => {
           </div>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           {message && <p style={{ color: 'green' }}>{message}</p>}
-          <button type='submit' className='button'>Submit</button>
+          <button type='submit' className='button'>Login</button>
         </form>
         <button onClick={() => setIsAdmin(!isAdmin)} className='toggle-button'>
           {isAdmin ? 'Switch to User Login' : 'Switch to Admin Login'}

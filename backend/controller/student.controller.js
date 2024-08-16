@@ -1,6 +1,6 @@
 import { Student } from '../model/student.model.js';
 import { checkOverlap } from '../utils/checkOverlap.js';
-import Payment from '../model/payment.model.js';
+import StudentPayment from '../model/studentPayment.model.js';
 
 // Save a new student detail
 const saveDetail = async (req, res) => {
@@ -72,7 +72,7 @@ const remove = async (req, res) => {
         }
         
         // Delete associated payments
-        await Payment.deleteMany({studentId:id });
+        await StudentPayment.deleteMany({studentId:id });
 
         res.status(200).send("Removed successfully");
     } catch (error) {

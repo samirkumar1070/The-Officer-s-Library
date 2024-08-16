@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const PaymentSchema = new mongoose.Schema({
+const StudentPaymentSchema = new mongoose.Schema({
   studentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Student',
@@ -21,5 +21,5 @@ const PaymentSchema = new mongoose.Schema({
   }
 });
 
-const Payment = mongoose.model('Payment', PaymentSchema);
-export default Payment;
+const StudentPayment = mongoose.model('StudentPayment', StudentPaymentSchema);
+export default StudentPayment;

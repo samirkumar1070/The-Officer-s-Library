@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AddData from './AddData.js';
 import ShowDetails from './ShowDetails.js';
 import Logout from '../Login/Logout.js';
-import '../Styles/user.css';
+import '../Styles/showDetails.css';
 
 function UserDashboard() {
   const [showComponent1, setShowComponent1] = useState(false);

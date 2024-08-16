@@ -5,7 +5,7 @@ import { registerUser } from './controller/userRegister.controller.js';
 import { loginUser } from './controller/userLogin.controller.js';
 import { logoutUser } from './controller/userLogout.controller.js';
 import { getDetails, remove, saveDetail, countStudentsByTimeSlot } from './controller/student.controller.js';
-import { addPayment,getPayments } from './controller/payment.cotroller.js';
+import { addPayment,getPayments } from './controller/studentPayment.cotroller.js';
 import { registerAdmin } from './controller/adminRegister.controller.js';
 import { loginAdmin } from './controller/adminLogin.controller.js';
 import { logoutAdmin } from './controller/adminLogout.controller.js';

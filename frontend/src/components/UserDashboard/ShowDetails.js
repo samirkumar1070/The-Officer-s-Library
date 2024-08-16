@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { format } from 'date-fns'; // Import the format function from date-fns
-import '../Styles/homepage.css'; // Ensure the CSS file is correctly imported
+import { format } from 'date-fns';
+import AddPayment from './AddPayment';
+import PaymentStatus from './PaymentStatus';
+import '../Styles/showDetails.css';
 
 const ShowDetails = () => {
   const [studentDetails, setStudentDetails] = useState([]);
   const [error, setError] = useState('');
-  const [time, setTime] = useState(''); // State to hold selected time
+  const [time, setTime] = useState('');
+  const [isAddPaymentOpen, setIsAddPaymentOpen] = useState(false);
+  const [isPaymentStatusOpen, setIsPaymentStatusOpen] = useState(false);
+  const [selectedStudentId, setSelectedStudentId] = useState(null);
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const response = await axios.get('http://localhost:5000/user/view', {
-          params: { time }, // Send 'time' parameter in query
+          params: { time },
           withCredentials: true
         });
         setStudentDetails(response.data);
@@ -23,17 +28,17 @@ const ShowDetails = () => {
     };
 
     fetchDetails();
-  }, [time]); // Fetch details when 'time' changes
+  }, [time]);
 
   const handleTimeClick = (selectedTime) => {
-    setTime(selectedTime); // Set the time and trigger useEffect
+    setTime(selectedTime);
   };
 
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(`http://localhost:5000/user/delete/${id}`, { withCredentials: true });
       if (response.status === 200) {
-        setStudentDetails(studentDetails.filter(sub => sub._id !== id)); // Remove deleted item from state
+        setStudentDetails(studentDetails.filter(sub => sub._id !== id));
       }
     } catch (error) {
       console.error('Error deleting item:', error);
@@ -43,6 +48,16 @@ const ShowDetails = () => {
 
   const formatDate = (dateString) => {
     return format(new Date(dateString), 'dd/MM/yyyy');
+  };
+
+  const handleAddPaymentClick = (studentId) => {
+    setSelectedStudentId(studentId);
+    setIsAddPaymentOpen(true);
+  };
+
+  const handlePaymentStatusClick = (studentId) => {
+    setSelectedStudentId(studentId);
+    setIsPaymentStatusOpen(true);
   };
 
   if (error) {
@@ -64,7 +79,7 @@ const ShowDetails = () => {
         <button onClick={() => handleTimeClick('s9')}>10:00PM-05:00AM</button>
         <button onClick={() => handleTimeClick('s10')}>24 HOURS</button>
       </div>
-      <div className='table-container'>
+      <div className={`table-container ${isAddPaymentOpen || isPaymentStatusOpen ? 'blur-background' : ''}`}>
         <table>
           <thead>
             <tr>
@@ -74,7 +89,7 @@ const ShowDetails = () => {
               <th>Mobile</th>
               <th>Address</th>
               <th>Date of Joining</th>
-              <th>Actions</th> {/* Column for delete buttons */}
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -86,14 +101,18 @@ const ShowDetails = () => {
                 <td>{sub.mobile}</td>
                 <td>{sub.address}</td>
                 <td>{formatDate(sub.doj)}</td>
-                <td>
-                  <button onClick={() => handleDelete(sub._id)}>Delete</button>
+                <td className="action-buttons">
+                  <button className="add-payment" onClick={() => handleAddPaymentClick(sub._id)}>Add Payment</button>
+                  <button className="view-status" onClick={() => handlePaymentStatusClick(sub._id)}>Payment Status</button>
+                  <button className="delete" onClick={() => handleDelete(sub._id)}>Delete</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {isAddPaymentOpen && <AddPayment studentId={selectedStudentId} onClose={() => setIsAddPaymentOpen(false)} />}
+      {isPaymentStatusOpen && <PaymentStatus studentId={selectedStudentId} onClose={() => setIsPaymentStatusOpen(false)} />}
     </div>
   );
 };

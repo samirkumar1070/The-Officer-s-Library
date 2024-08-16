@@ -1,0 +1,159 @@
+showDetails.css
+
+/* TABLE STYLES */
+.table-container {
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #23bbda;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* BUTTON STYLES */
+  .action-buttons button {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .action-buttons .add-payment {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+  
+  .action-buttons .add-payment:hover {
+    background-color: #45a049;
+  }
+  
+  .action-buttons .view-status {
+    background-color: #2196F3; /* Blue */
+    color: white;
+  }
+  
+  .action-buttons .view-status:hover {
+    background-color: #0b7dda;
+  }
+  
+  .action-buttons .delete {
+    background-color: #f44336; /* Red */
+    color: white;
+  }
+  
+  .action-buttons .delete:hover {
+    background-color: #da190b;
+  }
+  
+  /* BLUR BACKGROUND */
+  .blur-background {
+    filter: blur(5px);
+    pointer-events: none; /* Prevent interactions with the blurred content */
+  }
+  
+  /* MODAL OVERLAY */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* MODAL */
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1001; /* Ensure the modal is above the overlay */
+  }
+  
+  .modal h2 {
+    margin-top: 0;
+  }
+  
+  .modal form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal form div {
+    margin-bottom: 15px;
+  }
+  
+  .modal form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .modal form input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .modal button {
+    align-self: flex-end;
+    background-color: #23bbda;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .modal button:hover {
+    background-color: #1a8ca8;
+  }
+  
+  .modal button[type="button"] {
+    margin-left: 10px;
+  }
+  
+  /* PAYMENT STATUS TABLE */
+  .payment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .payment-table th, .payment-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .payment-table th {
+    background-color: #23bbda;
+    color: white;
+  }
+  
