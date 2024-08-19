@@ -3,13 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Logout from '../Login/Logout.js';
+import AddUserPayment from './AddUserPayment';
+import UserPaymentStatus from './UserPaymentStatus';
 import '../Styles/adminDashboard.css';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
+  const [isAddPaymentOpen, setIsAddPaymentOpen] = useState(false);
+  const [isPaymentStatusOpen, setIsPaymentStatusOpen] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
   const navigate = useNavigate();
-
 
   const fetchUsers = async () => {
     try {
@@ -71,13 +75,22 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleAddPaymentClick = (userId) => {
+    setSelectedUserId(userId);
+    setIsAddPaymentOpen(true);
+  };
+
+  const handlePaymentStatusClick = (userId) => {
+    setSelectedUserId(userId);
+    setIsPaymentStatusOpen(true);
+  };
+
   const handleHomeClick = () => {
     navigate('/'); // Redirect to home page
   };
 
   return (
     <div className='admin-dashboard'>
-
       <nav className='navbar'>
         <button onClick={handleHomeClick}>Home</button>
         <div className='logout-button'><Logout /></div>
@@ -99,6 +112,8 @@ const AdminDashboard = () => {
               <td>{user.email}</td>
               <td>{user.isActive ? 'Active' : 'Blocked'}</td>
               <td>
+                <button onClick={() => handleAddPaymentClick(user._id)}>Add Payment</button>
+                <button onClick={() => handlePaymentStatusClick(user._id)}>Payment Status</button>
                 {user.isActive ? (
                   <button onClick={() => handleBlock(user._id)}>Block</button>
                 ) : (
@@ -110,6 +125,8 @@ const AdminDashboard = () => {
           ))}
         </tbody>
       </table>
+      {isAddPaymentOpen && <AddUserPayment userId={selectedUserId} onClose={() => setIsAddPaymentOpen(false)} />}
+      {isPaymentStatusOpen && <UserPaymentStatus userId={selectedUserId} onClose={() => setIsPaymentStatusOpen(false)} />}
     </div>
   );
 };

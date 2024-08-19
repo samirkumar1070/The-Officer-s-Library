@@ -6,6 +6,7 @@ import { loginUser } from './controller/userLogin.controller.js';
 import { logoutUser } from './controller/userLogout.controller.js';
 import { getDetails, remove, saveDetail, countStudentsByTimeSlot } from './controller/student.controller.js';
 import { addPayment,getPayments } from './controller/studentPayment.cotroller.js';
+import { addUserPayment,getUserPayment } from './controller/userPayment.controller.js';
 import { registerAdmin } from './controller/adminRegister.controller.js';
 import { loginAdmin } from './controller/adminLogin.controller.js';
 import { logoutAdmin } from './controller/adminLogout.controller.js';
@@ -39,10 +40,12 @@ app.get('/',(req,res)=>{
 app.post('/admin/register',registerAdmin);
 app.post('/admin/login',loginAdmin);
 app.post('/admin/logout',logoutAdmin);
-app.get('/admin/users', verifyAdminToken, getUsers);
-app.put('/admin/block/:id',verifyAdminToken,  blockUser);
-app.put('/admin/unblock/:id',verifyAdminToken,  unblockUser);
-app.delete('/admin/delete/:id',verifyAdminToken,  removeUser);
+app.get('/admin/users', verifyAdminToken,getUsers);
+app.post('/admin/payment',addUserPayment);
+app.get('/admin/getpayment/:id',getUserPayment);
+app.put('/admin/block/:id',verifyAdminToken,blockUser);
+app.put('/admin/unblock/:id',verifyAdminToken,unblockUser);
+app.delete('/admin/delete/:id',verifyAdminToken,removeUser);
 
 // routes for student details
 
@@ -51,8 +54,8 @@ app.post('/user/login',loginUser);
 app.post('/user/logout', logoutUser);
 app.post('/user/add',verifyUserToken,saveDetail);
 app.get('/user/view',verifyUserToken,getDetails);
-app.post('/user/payment',addPayment);
-app.get('/user/getpayment/:id', getPayments);
+app.post('/user/payment',verifyUserToken,addPayment);
+app.get('/user/getpayment/:id',verifyUserToken,getPayments);
 app.delete('/user/delete/:id',verifyUserToken,remove);
 app.get('/user/countStudentsByTimeSlot',verifyUserToken,countStudentsByTimeSlot);
 
