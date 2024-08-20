@@ -101,7 +101,10 @@ const AdminDashboard = () => {
       <table className='users-table'>
         <thead>
           <tr>
+            <th>Username</th>
             <th>Email</th>
+            <th>Mobile</th>
+            <th>Location</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -109,7 +112,10 @@ const AdminDashboard = () => {
         <tbody>
           {users.map(user => (
             <tr key={user._id}>
+              <td>{user.username}</td>
               <td>{user.email}</td>
+              <td>{user.mobile}</td>
+              <td>{user.location}</td>
               <td>{user.isActive ? 'Active' : 'Blocked'}</td>
               <td>
                 <button onClick={() => handleAddPaymentClick(user._id)}>Add Payment</button>

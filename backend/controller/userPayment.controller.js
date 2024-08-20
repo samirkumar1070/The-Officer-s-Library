@@ -10,14 +10,16 @@ const addUserPayment =  async (req, res) => {
         return res.status(404).json({ msg: 'User not found' })
     }
 
-    const payment = new UserPayment({
+    const newPayment = new UserPayment({
       userId,
       paymentDate: date,
       amount,
       status: 'Paid' // or any default status
     });
 
-    await payment.save();
+    const payment = await newPayment.save();
+    user.payments.push(payment._id);
+    await user.save();
     res.status(201).json({ message: 'Payment added successfully' });
   } catch (error) {
     console.error('Error adding payment:', error);

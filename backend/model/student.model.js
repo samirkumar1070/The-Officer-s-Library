@@ -36,7 +36,7 @@ const StudentSchema =new mongoose.Schema({
     },
     payments: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Payment'
+        ref: 'StudentPayment'
     }]
 },{timestamps:true})
 

@@ -3,6 +3,10 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const UserSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
     email:{
         type:String,
         required:true,
@@ -12,10 +16,22 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    location: {
+        type: String,
+        required: true
+    },
+    mobile: {
+        type: Number,
+        required: true,
+    },
     isActive: { 
         type: Boolean, 
         default: true
     },
+    payments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserPayment'
+    }],
     refreshToken:{
         type: String
     }

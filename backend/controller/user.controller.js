@@ -1,6 +1,7 @@
 import { User } from '../model/user.model.js';
 import { Student } from '../model/student.model.js';
 import StudentPayment from '../model/studentPayment.model.js';
+import UserPayment from '../model/userPayment.model.js'
 
 const getUsers = async (req, res) => {
   try {
@@ -50,6 +51,9 @@ const removeUser = async (req, res) => {
 
     // Delete all payments associated with these students
     await StudentPayment.deleteMany({ studentId: { $in: studentIds } });
+
+    // Delete all payments directly associated with the user
+    await UserPayment.deleteMany({ userId: id });
 
     // If there are related Students to be deleted, handled here
     await Student.deleteMany({ user: id }); 
