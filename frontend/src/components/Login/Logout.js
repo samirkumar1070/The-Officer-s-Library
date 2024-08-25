@@ -11,14 +11,17 @@ const Logout = () => {
       const userEmail = Cookies.get('userEmail');
       const adminEmail = Cookies.get('adminEmail');
 
+      const base_url = process.env.REACT_APP_BASE_URL;
+
+
       if (userEmail) {
-        await axios.post('http://localhost:5000/user/logout', { email: userEmail });
+        await axios.post(`${base_url}/user/logout`, { email: userEmail });
         // Clear user-related cookies
         Cookies.remove('userEmail');
         Cookies.remove('userAccessToken');
         navigate('/');
       } else if (adminEmail) {
-        await axios.post('http://localhost:5000/admin/logout', { email: adminEmail });
+        await axios.post(`${base_url}/admin/logout`, { email: adminEmail });
         // Clear admin-related cookies
         Cookies.remove('adminEmail');
         Cookies.remove('adminAccessToken');

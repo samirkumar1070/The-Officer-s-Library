@@ -10,7 +10,8 @@ const UserPaymentStatus = ({ userId, onClose }) => {
   useEffect(() => {
     const fetchPaymentDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/admin/getpayment/${userId}`, {
+        const base_url = process.env.REACT_APP_BASE_URL;
+        const response = await axios.get(`${base_url}/admin/getpayment/${userId}`, {
           withCredentials: true
         });
         setPaymentDetails(response.data);

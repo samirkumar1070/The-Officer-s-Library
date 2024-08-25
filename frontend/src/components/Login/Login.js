@@ -12,13 +12,16 @@ const Login = () => {
   const [isAdmin, setIsAdmin] = useState(false); // New state for toggling admin/user
   const navigate = useNavigate();
 
+  const base_url = process.env.REACT_APP_BASE_URL;
+
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(""); // Reset error message
     setMessage(""); // Reset success message
 
     try {
-      const url = isAdmin ? 'http://localhost:5000/admin/login' : 'http://localhost:5000/user/login';
+      const url = isAdmin ? `${base_url}/admin/login` : `${base_url}/user/login`;
       const response = await axios.post(url, { email, password });
       // Set accessToken in the cookie
       const tokenName = isAdmin ? 'adminAccessToken' : 'userAccessToken';

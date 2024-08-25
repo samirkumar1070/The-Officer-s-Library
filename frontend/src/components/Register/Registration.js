@@ -13,6 +13,8 @@ const Register = () => {
   const [message, setMessage] = useState("");
   const [isAdmin, setIsAdmin] = useState(false); // New state for toggling admin/user
 
+  const base_url = process.env.REACT_APP_BASE_URL;
+
   const handleRegister = async (e) => {
     e.preventDefault();
     setError(""); // Reset error message
@@ -24,7 +26,7 @@ const Register = () => {
     }
 
     try {
-      const url = isAdmin ? 'http://localhost:5000/admin/register' : 'http://localhost:5000/user/register';
+      const url = isAdmin ? `${base_url}/admin/register` : `${base_url}/user/register`;
       const res = await axios.post(url, {
         email,
         password,

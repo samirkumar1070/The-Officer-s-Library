@@ -5,6 +5,8 @@ import '../Styles/showDetails.css';
 const AddPayment = ({ studentId, onClose }) => {
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState('');
+
+  const base_url = process.env.REACT_APP_BASE_URL;
   
   // console.log(studentId);
   // console.log(amount);
@@ -13,7 +15,7 @@ const AddPayment = ({ studentId, onClose }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:5000/user/payment', {
+      await axios.post(`${base_url}/user/payment`, {
         studentId,
         amount,
         paymentDate : date,

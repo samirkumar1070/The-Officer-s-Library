@@ -16,10 +16,14 @@ function Homepage() {
 
     const overlayRef = useRef(null);
 
+    const base_url = process.env.REACT_APP_BASE_URL;
+
+    //console.log("base url",base_url);
+
     useEffect(() => {
         const fetchStudentCounts = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/user/countStudentsByTimeSlot', { withCredentials: true });
+                const response = await axios.get(`${base_url}/user/countStudentsByTimeSlot`, { withCredentials: true });
                 setStudentCounts(response.data);
                 console.log(response.data); // Add this line to debug the response
             } catch (error) {

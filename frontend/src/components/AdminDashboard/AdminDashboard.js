@@ -15,9 +15,11 @@ const AdminDashboard = () => {
   const [selectedUserId, setSelectedUserId] = useState(null);
   const navigate = useNavigate();
 
+  const base_url = process.env.REACT_APP_BASE_URL;
+
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/users', {
+      const response = await axios.get(`${base_url}/admin/users`, {
         headers: {
           'Authorization': `Bearer ${Cookies.get('adminAccessToken')}`
         }
@@ -35,7 +37,7 @@ const AdminDashboard = () => {
 
   const handleBlock = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/admin/block/${id}`, {}, {
+      await axios.put(`${base_url}/admin/block/${id}`, {}, {
         headers: {
           'Authorization': `Bearer ${Cookies.get('adminAccessToken')}`
         }
@@ -49,7 +51,7 @@ const AdminDashboard = () => {
 
   const handleUnblock = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/admin/unblock/${id}`, {}, {
+      await axios.put(`${base_url}/admin/unblock/${id}`, {}, {
         headers: {
           'Authorization': `Bearer ${Cookies.get('adminAccessToken')}`
         }
@@ -63,7 +65,7 @@ const AdminDashboard = () => {
 
   const handleRemove = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/admin/delete/${id}`, {
+      await axios.delete(`${base_url}/admin/delete/${id}`, {
         headers: {
           'Authorization': `Bearer ${Cookies.get('adminAccessToken')}`
         }

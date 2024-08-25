@@ -9,8 +9,9 @@ const PaymentStatus = ({ studentId, onClose }) => {
 
   useEffect(() => {
     const fetchPaymentDetails = async () => {
+      const base_url = process.env.REACT_APP_BASE_URL;
       try {
-        const response = await axios.get(`http://localhost:5000/user/getpayment/${studentId}`, {
+        const response = await axios.get(`${base_url}/user/getpayment/${studentId}`, {
           withCredentials: true
         });
         setPaymentDetails(response.data);

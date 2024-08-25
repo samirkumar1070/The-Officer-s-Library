@@ -23,7 +23,8 @@ const AddData = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/user/add', { ...formData }, { withCredentials: true });
+            const base_url = process.env.REACT_APP_BASE_URL;
+            const response = await axios.post(`${base_url}/user/add`, { ...formData }, { withCredentials: true });
             if (response.status === 201) {
                 setMessageType('success');
                 setMessage("Data saved successfully");
