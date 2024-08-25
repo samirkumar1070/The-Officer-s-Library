@@ -1,4 +1,4 @@
-import { User } from '../model/user.model.js';
+import { Library } from '../model/library.model.js';
 
 const registerUser = async (req, res) => {
   const { username, email, password, mobile, location } = req.body;
@@ -24,11 +24,11 @@ const registerUser = async (req, res) => {
   }
 
   try {
-    let user = await User.findOne({ email });
+    let user = await Library.findOne({ email });
     if (user) {
       return res.status(400).json({ msg: 'User already exists' });
     }
-    user = new User({ username, email, password, mobile, location });
+    user = new Library({ username, email, password, mobile, location });
     await user.save();
     res.status(201).json({ msg: 'User Registered Successfully' }); // Send a success response
   } catch (err) {

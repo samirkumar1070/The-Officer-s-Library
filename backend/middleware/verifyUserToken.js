@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User } from '../model/user.model.js';
+import { Library } from '../model/library.model.js';
 
 const verifyUserToken = async (req, res, next) => {
     const token = req.cookies.userAccessToken || req.header("Authorization")?.replace("Bearer ", "");
@@ -16,7 +16,7 @@ const verifyUserToken = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
         // Find the admin associated with the token
-        const user = await User.findById(decoded._id).select('-password');
+        const user = await Library.findById(decoded._id).select('-password');
         if (!user) {
             return res.status(403).send({ msg: 'User not found' });
         }

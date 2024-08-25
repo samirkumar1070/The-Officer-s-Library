@@ -1,11 +1,11 @@
-import { User } from '../model/user.model.js';
+import { Library } from '../model/library.model.js';
 import { Student } from '../model/student.model.js';
 import StudentPayment from '../model/studentPayment.model.js';
-import UserPayment from '../model/userPayment.model.js'
+import UserPayment from '../model/libraryPayment.model.js'
 
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await Library.find();
     res.status(200).json(users);
   } catch (err) {
     console.error(err.message);
@@ -17,7 +17,7 @@ const blockUser = async (req, res) => {
   const { id } = req.params;
   //console.log(`Blocking user with ID: ${id}`);
   try {
-    const user = await User.findByIdAndUpdate(id, { isActive: false });
+    const user = await Library.findByIdAndUpdate(id, { isActive: false });
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
     }
@@ -31,7 +31,7 @@ const blockUser = async (req, res) => {
 const unblockUser = async (req, res) => {
   const { id } = req.params;
   try {
-    const user = await User.findByIdAndUpdate(id, { isActive: true });
+    const user = await Library.findByIdAndUpdate(id, { isActive: true });
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
     }
@@ -59,7 +59,7 @@ const removeUser = async (req, res) => {
     await Student.deleteMany({ user: id }); 
 
     //delete user
-    await User.findByIdAndDelete(id);
+    await Library.findByIdAndDelete(id);
    
     res.status(200).json({ msg: 'User removed successfully' });
   } catch (err) {

@@ -1,9 +1,9 @@
-import { User } from "../model/user.model.js";
+import { Library } from "../model/library.model.js";
 
 const logoutUser = async (req, res) => {
     const { email } = req.body;
     try {
-        let user = await User.findOne({ email });
+        let user = await Library.findOne({ email });
         if (!user) {
             return res.status(400).json({ msg: 'Invalid email' });
         }

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const UserPaymentSchema = new mongoose.Schema({
+const LibraryPaymentSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -21,5 +21,5 @@ const UserPaymentSchema = new mongoose.Schema({
   }
 });
 
-const UserPayment = mongoose.model('UserPayment', UserPaymentSchema);
-export default UserPayment;
+const LibraryPayment = mongoose.model('LibraryPayment', LibraryPaymentSchema);
+export default LibraryPayment;

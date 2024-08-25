@@ -1,16 +1,16 @@
 import express, { urlencoded } from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import { registerUser } from './controller/userRegister.controller.js';
-import { loginUser } from './controller/userLogin.controller.js';
-import { logoutUser } from './controller/userLogout.controller.js';
+import { registerUser } from './controller/libraryRegister.controller.js';
+import { loginUser } from './controller/libraryLogin.controller.js';
+import { logoutUser } from './controller/libraryLogout.controller.js';
 import { getDetails, remove, saveDetail, countStudentsByTimeSlot } from './controller/student.controller.js';
 import { addPayment,getPayments } from './controller/studentPayment.cotroller.js';
-import { addUserPayment,getUserPayment } from './controller/userPayment.controller.js';
+import { addUserPayment,getUserPayment } from './controller/libraryPayment.controller.js';
 import { registerAdmin } from './controller/adminRegister.controller.js';
 import { loginAdmin } from './controller/adminLogin.controller.js';
 import { logoutAdmin } from './controller/adminLogout.controller.js';
-import { getUsers, blockUser, unblockUser, removeUser } from './controller/user.controller.js';
+import { getUsers, blockUser, unblockUser, removeUser } from './controller/library.controller.js';
 import { connectDB } from './db/connect.db.js';
 import verifyUserToken from './middleware/verifyUserToken.js';
 import verifyAdminToken from './middleware/verifyAdminToken.js'

@@ -1,16 +1,16 @@
-import UserPayment from '../model/userPayment.model.js';
-import {User} from '../model/user.model.js'
+import LibraryPayment from '../model/libraryPayment.model.js';
+import {Library} from '../model/library.model.js'
 
 // Add payment for a user
 const addUserPayment =  async (req, res) => {
   const { userId, amount, date } = req.body;
   try {
-    const user = await User.findById(userId);
+    const user = await Library.findById(userId);
     if(!user){
         return res.status(404).json({ msg: 'User not found' })
     }
 
-    const newPayment = new UserPayment({
+    const newPayment = new LibraryPayment({
       userId,
       paymentDate: date,
       amount,
@@ -31,7 +31,7 @@ const addUserPayment =  async (req, res) => {
 const getUserPayment = async (req, res) => {
   const { id } = req.params;
   try {
-    const payments = await UserPayment.find({ userId: id });
+    const payments = await LibraryPayment.find({ userId: id });
     res.status(200).json(payments);
   } catch (error) {
     console.error('Error fetching payment details:', error);
