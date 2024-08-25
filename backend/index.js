@@ -21,8 +21,11 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = ['https://the-officer-s-library.vercel.app/'];
+const localorigin = 'http://localhost:3000';
+
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: allowedOrigins,
     methods: 'GET,POST,PUT,DELETE',
     credentials: true
 }));
