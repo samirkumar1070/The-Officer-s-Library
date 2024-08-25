@@ -13,7 +13,7 @@ import { logoutAdmin } from './controller/adminLogout.controller.js';
 import { getUsers, blockUser, unblockUser, removeUser } from './controller/library.controller.js';
 import { connectDB } from './db/connect.db.js';
 import verifyUserToken from './middleware/verifyUserToken.js';
-import verifyAdminToken from './middleware/verifyAdminToken.js'
+import verifyAdminToken from './middleware/verifyAdminToken.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
