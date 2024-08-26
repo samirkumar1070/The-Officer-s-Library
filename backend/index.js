@@ -21,16 +21,29 @@ dotenv.config();
 
 const app = express();
 
-const allowedOrigins = [
-    'https://the-officer-s-library.vercel.app', // Frontend deployed on Vercel
-    'http://localhost:3000' // Local development (if needed)
-];
+// const allowedOrigins = [
+//     'https://the-officer-s-library.vercel.app', // Frontend deployed on Vercel
+//     'http://localhost:3000' // Local development (if needed)
+// ];
 
-app.use(cors({
-    origin: allowedOrigins,
-    methods: ['GET','POST','PUT','DELETE'],
-    credentials: true
-}));
+// app.use(cors({
+//     origin: allowedOrigins,
+//     methods: ['GET','POST','PUT','DELETE'],
+//     credentials: true
+// }));
+
+// Allow requests from 'https://the-officer-s-library.vercel.app'
+const corsOptions = {
+    origin: 'https://the-officer-s-library.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // Allow cookies if needed
+  };
+  
+  app.use(cors(corsOptions));
+  
+  // Handling preflight requests
+  app.options('*', cors(corsOptions))
 
 app.use(express.json());
 app.use(bodyParser.json());
