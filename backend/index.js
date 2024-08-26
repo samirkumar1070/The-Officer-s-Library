@@ -38,7 +38,7 @@ app.use(urlencoded({extended:false}));
 app.use(cookieParser());
 
 app.get('/',(req,res)=>{
-    res.send("Welcome");
+    res.send("Welcome to the server of The officer's Library");
 })
 
 // Admin protected routes for managing users
