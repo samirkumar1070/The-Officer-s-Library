@@ -16,7 +16,8 @@ const ShowDetails = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/user/view', {
+        const base_url = process.env.REACT_APP_BASE_URL;
+        const response = await axios.get(`${base_url}/user/view`, {
           params: { time },
           withCredentials: true
         });
