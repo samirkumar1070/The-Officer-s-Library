@@ -41,7 +41,11 @@ const ShowDetails = () => {
   const handleDelete = async (id) => {
     try {
       const base_url = process.env.REACT_APP_BASE_URL;
-      const response = await axios.delete(`${base_url}/user/delete/${id}`, { withCredentials: true });
+      const response = await axios.delete(`${base_url}/user/delete/${id}`, { 
+        headers: {
+          'Authorization': `Bearer ${Cookies.get('userAccessToken')}`
+        }
+       });
       if (response.status === 200) {
         setStudentDetails(studentDetails.filter(sub => sub._id !== id));
       }
