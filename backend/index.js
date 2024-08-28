@@ -60,10 +60,10 @@ app.post('/user/login',loginUser);
 app.post('/user/logout', logoutUser);
 app.post('/user/add',saveDetail);
 app.get('/user/view',getDetails);
-app.post('/user/payment',verifyUserToken,addPayment);
-app.get('/user/getpayment/:id',verifyUserToken,getPayments);
-app.delete('/user/delete/:id',verifyUserToken,remove);
-app.get('/user/countStudentsByTimeSlot',verifyUserToken,countStudentsByTimeSlot);
+app.post('/user/payment',addPayment);
+app.get('/user/getpayment/:id',getPayments);
+app.delete('/user/delete/:id',remove);
+app.get('/user/countStudentsByTimeSlot',countStudentsByTimeSlot);
 
 app.listen(process.env.PORT,(err)=>{
     if(err) throw err;
