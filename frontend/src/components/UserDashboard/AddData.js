@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import '../Styles/user.css';
 
 const AddData = () => {
@@ -24,7 +25,11 @@ const AddData = () => {
         e.preventDefault();
         try {
             const base_url = process.env.REACT_APP_BASE_URL;
-            const response = await axios.post(`${base_url}/user/add`, { ...formData }, { withCredentials: true });
+            const response = await axios.post(`${base_url}/user/add`, { ...formData }, { 
+                headers: {
+                    'Authorization': `Bearer ${Cookies.get('userAccessToken')}`
+                  }
+             });
             if (response.status === 201) {
                 setMessageType('success');
                 setMessage("Data saved successfully");

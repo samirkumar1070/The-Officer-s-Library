@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { format } from 'date-fns';
 import '../Styles/showDetails.css';
 
@@ -12,7 +13,9 @@ const PaymentStatus = ({ studentId, onClose }) => {
       const base_url = process.env.REACT_APP_BASE_URL;
       try {
         const response = await axios.get(`${base_url}/user/getpayment/${studentId}`, {
-          withCredentials: true
+          headers: {
+            'Authorization': `Bearer ${Cookies.get('userAccessToken')}`
+          }
         });
         setPaymentDetails(response.data);
       } catch (error) {

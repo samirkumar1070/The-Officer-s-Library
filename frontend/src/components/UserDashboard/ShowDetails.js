@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { format } from 'date-fns';
 import AddPayment from './AddPayment';
 import PaymentStatus from './PaymentStatus';
@@ -19,7 +20,9 @@ const ShowDetails = () => {
         const base_url = process.env.REACT_APP_BASE_URL;
         const response = await axios.get(`${base_url}/user/view`, {
           params: { time },
-          withCredentials: true
+          headers: {
+            'Authorization': `Bearer ${Cookies.get('userAccessToken')}`
+          }
         });
         setStudentDetails(response.data);
       } catch (error) {
