@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import '../Styles/addPayment.css';
 
 const AddUserPayment = ({ userId, onClose }) => {
@@ -19,7 +20,11 @@ const AddUserPayment = ({ userId, onClose }) => {
         userId,
         date,
         amount,
-      }, { withCredentials: true });
+      }, { 
+        headers: {
+          'Authorization': `Bearer ${Cookies.get('adminAccessToken')}`
+        }
+       });
       onClose();
     } catch (error) {
       console.error('Error adding payment:', error);

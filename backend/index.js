@@ -47,8 +47,8 @@ app.post('/admin/register',registerAdmin);
 app.post('/admin/login',loginAdmin);
 app.post('/admin/logout',logoutAdmin);
 app.get('/admin/users', verifyAdminToken,getUsers);
-app.post('/admin/payment',addUserPayment);
-app.get('/admin/getpayment/:id',getUserPayment);
+app.post('/admin/payment',verifyAdminToken,addUserPayment);
+app.get('/admin/getpayment/:id',verifyAdminToken,getUserPayment);
 app.put('/admin/block/:id',verifyAdminToken,blockUser);
 app.put('/admin/unblock/:id',verifyAdminToken,unblockUser);
 app.delete('/admin/delete/:id',verifyAdminToken,removeUser);
@@ -58,14 +58,14 @@ app.delete('/admin/delete/:id',verifyAdminToken,removeUser);
 app.post('/user/register',registerUser);
 app.post('/user/login',loginUser);
 app.post('/user/logout', logoutUser);
-app.post('/user/add',saveDetail);
-app.get('/user/view',getDetails);
-app.post('/user/payment',addPayment);
-app.get('/user/getpayment/:id',getPayments);
-app.delete('/user/delete/:id',remove);
-app.get('/user/countStudentsByTimeSlot',countStudentsByTimeSlot);
+app.post('/user/add',verifyUserToken,saveDetail);
+app.get('/user/view',verifyUserToken,getDetails);
+app.post('/user/payment',verifyUserToken,addPayment);
+app.get('/user/getpayment/:id',verifyUserToken,getPayments);
+app.delete('/user/delete/:id',verifyUserToken,remove);
+app.get('/user/countStudentsByTimeSlot',verifyUserToken,countStudentsByTimeSlot);
 
-app.listen(process.env.PORT,(err)=>{
+app.listen(process.env.PORT || 5000,(err)=>{
     if(err) throw err;
     console.log("Server created at port 5000");
 })
