@@ -5,6 +5,7 @@ import Card from "./Card";
 import Footer from './Footer';
 import Register from "../Register/Registration";
 import Login from "../Login/Login";
+import Cookies from 'js-cookie';
 import '../Styles/homepage.css';
 
 function Homepage() {
@@ -23,7 +24,11 @@ function Homepage() {
     useEffect(() => {
         const fetchStudentCounts = async () => {
             try {
-                const response = await axios.get(`${base_url}/user/countStudentsByTimeSlot`, { withCredentials: true });
+                const response = await axios.get(`${base_url}/user/countStudentsByTimeSlot`, { 
+                    headers: {
+                        'Authorization': `Bearer ${Cookies.get('userAccessToken')}`
+                      }
+                 });
                 setStudentCounts(response.data);
                 console.log(response.data); // Add this line to debug the response
             } catch (error) {
