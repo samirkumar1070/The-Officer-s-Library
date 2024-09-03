@@ -29,15 +29,20 @@ const StudentSchema =new mongoose.Schema({
         type:Date,
         required: true,
     },
-    user:{
+    library:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
+        ref:'Library',
         required: true
     },
     payments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'StudentPayment'
-    }]
+    }],
+    status: { 
+        type: String,
+        enum: ['Pending', 'Accepted', 'Rejected'],
+        default: 'Pending'
+    }
 },{timestamps:true})
 
 export const Student = mongoose.model("Student",StudentSchema);

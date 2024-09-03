@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddData from './AddData.js';
 import ShowDetails from './ShowDetails.js';
+import Requests from './Requests.js';  // Import the new Requests component
 import Logout from '../Login/Logout.js';
 import '../Styles/showDetails.css';
 
 function UserDashboard() {
   const [showComponent1, setShowComponent1] = useState(false);
   const [showComponent2, setShowComponent2] = useState(false);
+  const [showRequests, setShowRequests] = useState(false); // State for showing requests
   const navigate = useNavigate();
 
   const handleClick1 = () => {
@@ -18,6 +20,10 @@ function UserDashboard() {
     setShowComponent2(!showComponent2);
   };
 
+  const handleRequestsClick = () => {
+    setShowRequests(!showRequests); // Toggle requests visibility
+  };
+
   const handleHomeClick = () => {
     navigate('/'); // Redirect to home page
   };
@@ -26,7 +32,7 @@ function UserDashboard() {
     <div className='userpage'>
       <nav className='navbar'>
         <button onClick={handleHomeClick}>Home</button>
-        <div ><Logout /></div>
+        <div><Logout /></div>
       </nav>
       <div className='component-block'>
         <ul className='l1'>
@@ -41,6 +47,13 @@ function UserDashboard() {
             <div>
               <button onClick={handleClick2} className='button'>View/Remove</button>
               {showComponent2 && <ShowDetails />}
+            </div>
+          </li>
+          <li>|</li>
+          <li>
+            <div>
+              <button onClick={handleRequestsClick} className='button'>Requests</button>
+              {showRequests && <Requests />} {/* Show requests when button is clicked */}
             </div>
           </li>
         </ul>

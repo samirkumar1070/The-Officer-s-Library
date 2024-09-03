@@ -8,9 +8,9 @@ const saveDetail = async (req, res) => {
 
     try {
         // Find existing students with the same seat number on the same date
-        // console.log('Query parameters:', { seatno, doj, user: req.user._id });
+        // console.log('Query parameters:', { seatno, doj, library: req.user._id });
 
-        const existingStudents = await Student.find({ seatno,user: req.user._id });
+        const existingStudents = await Student.find({ seatno, library: req.user._id });
         // console.log('Existing students:', existingStudents); // Log existing students
 
         // Check for overlapping time slots
@@ -32,7 +32,8 @@ const saveDetail = async (req, res) => {
             mobile,
             time,
             doj,
-            user: req.user._id
+            library: req.user._id,
+            status: 'Accepted'
         });
 
         await newStudent.save();
@@ -50,7 +51,7 @@ const getDetails = async (req, res) => {
     const { time } = req.query; // Get 'time' from query parameters
 
     try {
-        const query = { user: req.user._id }; // Filter by user ID to ensure data segregation
+        const query = { library: req.user._id, status:'Accepted'}; // Filter by user ID to ensure data segregation
         if (time) {
             query.time = time; // Add time filter if provided
         }
@@ -103,5 +104,44 @@ const countStudentsByTimeSlot = async (req, res) => {
     }
 };
 
+//get pending admission requests
+const getPendingRequests = async (req, res) => {
+    try {
+        const requests = await Student.find({library: req.user._id , status: 'Pending' }).sort({ seatno: 1 });
+        res.status(200).json(requests);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
 
-export { saveDetail, getDetails, remove, countStudentsByTimeSlot };
+//accept pending admission request
+const acceptRequest = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Student.findByIdAndUpdate(id, { status: 'Accepted' });
+        res.status(200).json({ msg: 'Admission request accepted' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+//reject pending admission request
+const rejectRequest = async (req, res) => {
+    try {
+        const { id } = req.params;
+        // Find and delete the student record
+        const deletedStudent = await Student.findByIdAndDelete(id);
+        if (!deletedStudent) {
+            return res.status(404).json({ msg: 'Admission request not found' });
+        }
+        res.status(200).json({ msg: 'Admission request rejected and student details deleted' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+
+export { saveDetail, getDetails, remove, countStudentsByTimeSlot, getPendingRequests, acceptRequest, rejectRequest };
