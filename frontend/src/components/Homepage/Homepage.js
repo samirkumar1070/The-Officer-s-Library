@@ -6,7 +6,7 @@ import Footer from './Footer';
 import Register from "../Register/Registration";
 import Login from "../Login/Login";
 import Cookies from 'js-cookie';
-import '../Styles/homepage.css';
+import '../styles/homepage.css';
 
 function Homepage() {
     const [showLoginBox, setShowLoginBox] = useState(false);
@@ -37,7 +37,7 @@ function Homepage() {
             }
         };
         fetchStudentCounts();
-    }, []);
+    });
 
     const handleLoginClick = () => {
         setShowLoginBox(!showLoginBox);
@@ -85,13 +85,17 @@ function Homepage() {
             </div>
             <div className={`main-content ${showLoginBox || showRegisterBox ? 'blur-background' : ''}`}>
                 <div className="bottomHeaders">
-                    <h1>Welcome to the library</h1>
+                    <h1>Welcome To The Officer's Library</h1>
                 </div>
                 <div className="tiles">
                     <Card time="06:00AM-10:00AM" availableSeats={TotalSeats - getCountForTimeSlot('s1')} color="green" />
                     <Card time="10:00AM-02:00PM" availableSeats={TotalSeats - getCountForTimeSlot('s2')} color="blue" />
                     <Card time="02:00PM-06:00PM" availableSeats={TotalSeats - getCountForTimeSlot('s3')} color="red" />
                     <Card time="06:00AM-02:00PM" availableSeats={TotalSeats - getCountForTimeSlot('s4')} color="orange" />
+                    <Card time="10:00AM-06:00PM" availableSeats={TotalSeats - getCountForTimeSlot('s5')} color="violet" />
+                    <Card time="02:00PM-10:00PM" availableSeats={TotalSeats - getCountForTimeSlot('s6')} color="maroon" />
+                    <Card time="06:00PM-10:00PM" availableSeats={TotalSeats - getCountForTimeSlot('s7')} color="cyan" />
+                    <Card time="12:00PM-04:00PM" availableSeats={TotalSeats - getCountForTimeSlot('s8')} color="silver" />
                     {/* Add more cards for other time slots as needed */}
                 </div>
                 <div>

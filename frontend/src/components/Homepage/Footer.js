@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/footer.css';
+import '../styles/footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
@@ -21,16 +21,16 @@ const Footer = () => {
         <div>
           <h3>Follow Us</h3>
           <div className="social-icons">
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.facebook.com/profile.php?id=100006155320925" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faFacebook} size="2x" />
             </a>
-            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/Samir43998050" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faTwitter} size="2x" />
             </a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/samirkumar1070/" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faInstagram} size="2x" />
             </a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/samir-5292ab222/" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faLinkedin} size="2x" />
             </a>
           </div>
