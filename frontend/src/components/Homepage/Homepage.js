@@ -6,7 +6,7 @@ import Footer from './Footer';
 import Register from "../Register/Registration";
 import Login from "../Login/Login";
 import Cookies from 'js-cookie';
-import '../styles/homepage.css';
+import '../Styles/homepage.css';
 
 function Homepage() {
     const [showLoginBox, setShowLoginBox] = useState(false);
