@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import '../Styles/user.css';
+import style from '../Styles/addData.module.css';
 
 const AddData = () => {
     const [formData, setFormData] = useState({
@@ -54,13 +54,13 @@ const AddData = () => {
     }
 
     return (
-        <div className='div1'>
+        <div className={style.div1}>
             {message && (
                 <div className={`message ${messageType}`}>
                     {message}
                 </div>
             )}
-            <form onSubmit={handleSubmit} className='form'>
+            <form onSubmit={handleSubmit} className={style.form}>
                 <label>Seat Number :
                     <input type="number" name='seatno' value={formData.seatno} onChange={handleChange} required />
                 </label>
@@ -94,7 +94,7 @@ const AddData = () => {
                 <label>Date of Joining :
                     <input type='date' name='doj' value={formData.doj} onChange={handleChange} />
                 </label>
-                <button type='submit' className='button'>Submit</button>
+                <button type='submit' className={style.button}>Submit</button>
             </form>
         </div>
     )

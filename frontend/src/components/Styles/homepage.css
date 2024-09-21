@@ -26,11 +26,6 @@
   z-index: 10; /* Ensure the header is above the main content */
 }
 
-.logo {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
 .nav {
   display: flex;
   gap: 20px;
@@ -168,8 +163,25 @@
 
 /* TILES */
 .tiles {
-  /* display: flex; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 10px; /* space between tiles */
+  margin-top: 20px;
+  justify-content: center; /* centers the tiles horizontally */
 }
+
+@media (max-width: 768px) {
+  .tiles {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .tiles {
+    grid-template-columns: 1fr; /* 1 column on very small screens */
+  }
+}
+
 
 /* CARD */
 .card {
@@ -227,4 +239,41 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 1000;
+}
+
+/* round logo */
+.logo-wrapper {
+  width: 40px; /* Slightly larger to include padding */
+  height: 40px;
+  background-color: #00000085; /* Change to your desired background color */
+  border-radius: 50%; /* Ensures the wrapper is round */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px; /* Optional: Adds padding around the logo */
+}
+
+.round-logo {
+  width: 55px; /* Adjust size as needed */
+  height: 55px;
+  border-radius: 50%; /* Makes the image round */
+  object-fit: cover; /* Ensures the image covers the entire area */
+}
+
+.bottomHeaders {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px; /* Adjust height as needed */
+  text-align: center;
+  font-family: 'Roboto', sans-serif; /* Use a nice, clean font */
+  font-size: 2.5rem; /* Adjust font size as needed */
+  font-weight: bold; /* Makes the text bold */
+  color: #333333; /* Change the color if needed */
+}
+
+@media (max-width: 768px) {
+  .bottomHeaders {
+    font-size: 2rem; /* Responsive font size for smaller screens */
+  }
 }

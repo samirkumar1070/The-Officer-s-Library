@@ -93,9 +93,10 @@ const AdminDashboard = () => {
 
   return (
     <div className='admin-dashboard'>
+      
       <nav className='navbar'>
         <button onClick={handleHomeClick}>Home</button>
-        <div className='logout-button'><Logout /></div>
+        <div><Logout /></div>
       </nav>
 
       <h1>Admin Dashboard</h1>

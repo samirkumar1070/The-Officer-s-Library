@@ -2,61 +2,44 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddData from './AddData.js';
 import ShowDetails from './ShowDetails.js';
-import Requests from './Requests.js';  // Import the new Requests component
+import Requests from './Requests.js';
 import Logout from '../Login/Logout.js';
-import '../Styles/showDetails.css';
+import style from '../Styles/userDashboard.module.css';
 
 function UserDashboard() {
-  const [showComponent1, setShowComponent1] = useState(false);
-  const [showComponent2, setShowComponent2] = useState(false);
-  const [showRequests, setShowRequests] = useState(false); // State for showing requests
+  const [activeComponent, setActiveComponent] = useState(''); // State to track which component to show
   const navigate = useNavigate();
 
-  const handleClick1 = () => {
-    setShowComponent1(!showComponent1);
-  };
-
-  const handleClick2 = () => {
-    setShowComponent2(!showComponent2);
-  };
-
-  const handleRequestsClick = () => {
-    setShowRequests(!showRequests); // Toggle requests visibility
+  const handleComponentChange = (component) => {
+    setActiveComponent(component); // Set the active component based on button clicked
   };
 
   const handleHomeClick = () => {
-    navigate('/'); // Redirect to home page
+    navigate('/');
   };
 
   return (
-    <div className='userpage'>
-      <nav className='navbar'>
+    <div className={style.userpage}>
+      
+      <nav className={style.navbar}>
         <button onClick={handleHomeClick}>Home</button>
         <div><Logout /></div>
       </nav>
-      <div className='component-block'>
-        <ul className='l1'>
-          <li>
-            <div>
-              <button onClick={handleClick1} className='button'>Add</button>
-              {showComponent1 && <AddData />}
-            </div>
-          </li>
-          <li>|</li>
-          <li>
-            <div>
-              <button onClick={handleClick2} className='button'>View/Remove</button>
-              {showComponent2 && <ShowDetails />}
-            </div>
-          </li>
-          <li>|</li>
-          <li>
-            <div>
-              <button onClick={handleRequestsClick} className='button'>Requests</button>
-              {showRequests && <Requests />} {/* Show requests when button is clicked */}
-            </div>
-          </li>
-        </ul>
+      
+      <div className={style.content}>
+        {/* Sidebar for buttons */}
+        <div className={style.sidebar}>
+          <button onClick={() => handleComponentChange('add')} className={style.button}>Add</button>
+          <button onClick={() => handleComponentChange('view')} className={style.button}>View/Remove</button>
+          <button onClick={() => handleComponentChange('requests')} className={style.button}>Requests</button>
+        </div>
+
+        {/* Main content area */}
+        <div className={style.maincontent}>
+          {activeComponent === 'add' && <AddData />}
+          {activeComponent === 'view' && <ShowDetails />}
+          {activeComponent === 'requests' && <Requests />}
+        </div>
       </div>
     </div>
   );

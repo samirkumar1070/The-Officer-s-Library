@@ -1,5 +1,9 @@
-.admin-dashboard {
-    padding: 20px;
+  .admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 35px 15px;
+    overflow: hidden; /* Prevent page overflow */
   }
   
   .error {
@@ -17,7 +21,7 @@
   }
   
   .users-table th {
-    background-color: #f2f2f2;
+    background-color: #23bbda;
   }
   
   button {
@@ -30,10 +34,30 @@
     cursor: pointer;
   }
   
-  button:hover {
-    background-color: #0056b3;
-  }
+  /* Navbar styling */
+
+.navbar {
+  position: fixed; /* Fixes the navbar at the top */
+  top: 0;
+  left: 0;
+  right: 0;
   
-  .logout-button {
-    padding: 10px 30px; /* Make the logout button slightly larger */
-  }
+  display: flex;
+  justify-content: space-between; /* Space between Home button and Logout */
+  background-color: #333;
+  padding: 10px;
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+.navbar button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.navbar button:hover {
+  background-color: #0056b3;
+}

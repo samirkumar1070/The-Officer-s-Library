@@ -1,0 +1,80 @@
+/* General styling for the user dashboard page */
+.userpage {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; /* Prevent page overflow */
+}
+
+/* Navbar styling */
+.navbar {
+    position: fixed; /* Fixes the navbar at the top */
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between; /* Space between Home button and Logout */
+    background-color: #333;
+    padding: 10px;
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+.navbar button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.navbar button:hover {
+    background-color: #0056b3;
+}
+
+/* Content area styling */
+.content {
+    display: flex;
+    flex: 1;
+    padding: 55px 20px 20px 220px; /* Adjusted for fixed navbar and sidebar */
+    overflow-y: auto; /* Scrollable content */
+    height: calc(100vh - 50px); /* Full height minus navbar height */
+}
+
+/* Sidebar for the buttons */
+.sidebar {
+    position: fixed; /* Fixes the sidebar on the left */
+    top: 55px; /* Below the navbar */
+    left: 0;
+    width: 200px;
+    height: calc(100vh - 50px); /* Full height minus navbar height */
+    background-color: #f8f9fa;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.sidebar .button {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sidebar .button:hover {
+    background-color: #0056b3;
+}
+
+/* Main content area */
+.maincontent {
+    flex: 1;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
