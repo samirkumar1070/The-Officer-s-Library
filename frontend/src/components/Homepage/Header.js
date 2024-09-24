@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from '../../images/library_logo.png';
 import '../Styles/homepage.css';
 
 const Header = () => {
@@ -10,7 +11,9 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="logo">MyLogo</div>
+      <div className="logo-wrapper">
+        <img src={logo} alt="Logo" className="round-logo" />
+      </div>
       <nav className={`nav ${isOpen ? 'open' : ''}`}>
         <a href="#home">Home</a>
         <a href="#about">About</a>
